@@ -1,0 +1,126 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+
+  facto:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: facto
+        run: cargo build
+      - name: Test
+        working-directory: facto
+        run: cargo test
+      - name: Run
+        working-directory: facto
+        run: cargo run
+
+  fibo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: fibo
+        run: cargo build
+      - name: Test
+        working-directory: fibo
+        run: cargo test
+      - name: Run
+        working-directory: fibo
+        run: cargo run
+
+  isqrt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: isqrt
+        run: cargo build
+      - name: Test
+        working-directory: isqrt
+        run: cargo test
+      - name: Run
+        working-directory: isqrt
+        run: cargo run
+
+  power-of-two:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: power_of_two
+        run: cargo build
+      - name: Test
+        working-directory: power_of_two
+        run: cargo test
+      - name: Run
+        working-directory: power_of_two
+        run: cargo run
+
+  digit-count:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: digit_count
+        run: cargo build
+      - name: Test
+        working-directory: digit_count
+        run: cargo test
+      - name: Run
+        working-directory: digit_count
+        run: cargo run
+
+  divisor-sum:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: divisor_sum
+        run: cargo build
+      - name: Test
+        working-directory: divisor_sum
+        run: cargo test
+      - name: Run (debug)
+        working-directory: divisor_sum
+        run: cargo clean && cargo run -- 137438691328
+      - name: Run (release)
+        working-directory: divisor_sum
+        run: cargo clean && cargo run --release -- 137438691328
+
+  perfect-numbers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        working-directory: perfect_numbers
+        run: cargo build
+      - name: Test
+        working-directory: perfect_numbers
+        run: cargo test
+      - name: Run (debug)
+        working-directory: perfect_numbers
+        run: cargo clean && cargo run
+      - name: Run (release)
+        working-directory: perfect_numbers
+        run: |
+          cargo clean && cargo run --release
+          time ./target/release/perfect_numbers
+      - name: Run (debug)
+        working-directory: perfect_numbers
+        run: |
+          cargo clean && cargo run
+          time ./target/debug/perfect_numbers
