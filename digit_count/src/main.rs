@@ -1,9 +1,12 @@
 fn main()
 {
-    for i in 0..64 {
+    for i in 0..=64 {
         let mut inp: u64 = i;
-        if i != 0 {
-            inp = (1 as u64) << i;
+        if i == 0 {
+            inp = 0;
+        }
+        else {
+            inp = (1 as u64) << (i - 1);
         }
         println!("digit_count({}) = {}", inp, digit_count(inp));
     }
