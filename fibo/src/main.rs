@@ -1,38 +1,36 @@
-fn main()
-{
-    for i in 0..=90 {
+fn main() {
+    for i in 0..=10 {
+        println!("fibo({}) = {}", i, fibo(i));
+    }
+    println!("...");
+    for i in 81..=90 {
         println!("fibo({}) = {}", i, fibo(i));
     }
 }
 
-fn fibo(n: u64) -> u64
-{
-    if n == 0 {
-        return 0;
-    }
-    if n == 1 {
-        return 1;
-    }
-    let mut f = [0, 1, 1];
-    for i in 0..=(n-2) {
-        f[((i + 2) % 3) as usize] = f[(i % 3) as usize] + f[((i + 1) % 3) as usize];
-    }
-    f[(n % 3) as usize]
+fn idx(n: u64) -> usize {
+    (n % 3) as usize
 }
 
-#[cfg(test)]
-mod tests
-{
-    use super::*;
+fn fibo(n: u64) -> u64 {
+    let mut f = [0 as u64, 1, 1]; 
+    for i in 2..=n {
+        f[idx(i)] = f[idx(i-2)] + f[idx(i-1)];
+    }
+    f[idx(n)]
+}   
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
     #[test]
-    fn test_fibo()
-    {
+    fn test_fibo() {
         assert_eq!(fibo(0), 0);
         assert_eq!(fibo(1), 1);
         assert_eq!(fibo(2), 1);
         assert_eq!(fibo(3), 2);
-        assert_eq!(fibo(10), 55);
+        assert_eq!(fibo(4), 3);
         assert_eq!(fibo(90), 2880067194370816120);
     }
 }
